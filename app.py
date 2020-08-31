@@ -34,7 +34,8 @@ MAX_ID_VALUE = TOTAL_BUCKETS - 1
 # This scalar has the necessary property:
 # gcd(SCALAR, TOTAL_BUCKETS)= 1.
 SCALAR = 3141592
-SCALAR_INVERSE = pow(SCALAR, -1, TOTAL_BUCKETS)
+# equivalent to pow(SCALAR, -1, TOTAL_BUCKETS) in python 3.8+
+SCALAR_INVERSE = 5252017
 
 
 class Link(db.Model):

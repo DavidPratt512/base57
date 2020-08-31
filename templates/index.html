@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    base57 | URL Shortener
+</title>
+{% endblock %}
+
+{% block body %}
+<div id="form" class="container">
+
+    <form action="/" method="POST" name="mainform">
+
+        <input type="url" id="url-input" name="url-input" placeholder="{{ long_url if long_url else 'Paste in a URL to shorten' }}" required autofocus>
+        <input type="submit" class="btn" value="{{ button_text }}">
+
+    </form>
+
+</div>
+
+{% if short_url %}
+<div id="response" class="container">
+
+    <p>
+        Your shiny new short link:
+    <a class="the-link" href="https://base57.xyz/{{ short_url }}">https://base57.xyz/{{ short_url }}</a>
+    </p>
+    <p>
+        <button class="btn link-copy-btn">Copy to Clipboard</button>
+    </p>
+</div>
+<script type="text/javascript">
+    var copyLinkBtn = document.querySelector('.link-copy-btn');
+
+    copyLinkBtn.addEventListener(
+      'click',
+      function(event) {
+        var shortlink = document.querySelector('.the-link');
+        var range = document.createRange();
+        range.selectNode(shortlink);
+        window.getSelection().addRange(range);
+
+        try {
+          var successful = document.execCommand('copy');
+          var message = successful ? 'successful' : 'unsuccessful';
+          console.log('Copy email was ' + message);
+        } catch(err) {
+          console.log('Unable to copy to clipboard');
+        }
+        window.getSelection().removeRange(range);
+      }
+    )
+</script>
+{% endif %}
+
+{% endblock %}

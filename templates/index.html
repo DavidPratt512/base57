@@ -23,7 +23,7 @@
 
     <p>
         Your shiny new short link:
-        <input type="url" disabled class="the-link" value="http://b57.xyz/{{ short_url }}">
+        <input type="url" class="the-link" value="http://b57.xyz/{{ short_url }}">
         <!--
             <a class="the-link" href="http://b57.xyz/{{ short_url }}">http://b57.xyz/{{ short_url }}</a>
         -->
@@ -39,8 +39,10 @@
       'click',
       function(event) {
         var shortlink = document.querySelector('.the-link');
+        shortlink.focus();
         shortlink.select();
         var outcome = document.execCommand("copy") ? "successful" : "unsucessful";
+        shortlink.blur();
         console.log("Copy to clipboard was " + outcome);
       }
     )

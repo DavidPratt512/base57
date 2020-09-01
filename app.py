@@ -9,9 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from math import log
 
 
-DATABASE_NAME = 'base57.db'
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DATABASE_NAME}'
+app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -38,18 +37,7 @@ SCALAR = 3141592
 SCALAR_INVERSE = 5252017
 
 
-class Link(db.Model):
-    """
-    We are not required to store the shortlink that we give to a user.
-    This is because the link_id is encoded deterministically in base 57
-    and can decoded with ease.
-    """
-    link_id = db.Column(
-        db.Integer,
-        db.Sequence('seq_link_id', start=0, maxvalue=MAX_ID_VALUE),
-        primary_key=True
-    )
-    long_url = db.Column(db.String(1024), nullable=False)
+from models import Link
 
 
 def encode(n, reversed_digits=None):
@@ -168,8 +156,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    if not os.path.exists(DATABASE_NAME):
-        db.create_all()
-
     app.run(threaded=True)
 

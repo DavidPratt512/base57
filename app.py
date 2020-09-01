@@ -137,8 +137,8 @@ def index_post():
         db.session.commit()
         short_url = encode((SCALAR * link.link_id) % TOTAL_BUCKETS)
         return render_template('index.html', button_text=random.choice(BUTTON_TEXT), long_url=long_url, short_url=short_url)
-    except:
-        return render_template('index.html', button_text=random.choice(BUTTON_TEXT), long_url=long_url, short_url="Oops!")
+    except Exception as e:
+        return render_template('index.html', button_text=random.choice(BUTTON_TEXT), long_url=long_url, short_url=e)
 
 
 @app.route('/<string:short_url>')

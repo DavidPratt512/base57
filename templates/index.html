@@ -23,7 +23,10 @@
 
     <p>
         Your shiny new short link:
-    <a class="the-link" href="http://b57.xyz/{{ short_url }}">http://b57.xyz/{{ short_url }}</a>
+        <input type="url" disabled class="the-link" value="http://b57.xyz/{{ short_url }}">
+        <!--
+            <a class="the-link" href="http://b57.xyz/{{ short_url }}">http://b57.xyz/{{ short_url }}</a>
+        -->
     </p>
     <p>
         <button class="btn link-copy-btn">Copy to Clipboard</button>
@@ -36,18 +39,9 @@
       'click',
       function(event) {
         var shortlink = document.querySelector('.the-link');
-        var range = document.createRange();
-        range.selectNode(shortlink);
-        window.getSelection().addRange(range);
-
-        try {
-          var successful = document.execCommand('copy');
-          var message = successful ? 'successful' : 'unsuccessful';
-          console.log('Copy email was ' + message);
-        } catch(err) {
-          console.log('Unable to copy to clipboard');
-        }
-        window.getSelection().removeRange(range);
+        shortlink.select();
+        var outcome = document.execCommand("copy") ? "successful" : "unsucessful";
+        console.log("Copy to clipboard was " + outcome);
       }
     )
 </script>

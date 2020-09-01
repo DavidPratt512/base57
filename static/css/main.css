@@ -67,6 +67,8 @@ footer span {
 
 #response .the-link {
     font-weight: bold;
+    width: 120px;
+    padding: 4px 10px;
 }
 
 input[type=url] {

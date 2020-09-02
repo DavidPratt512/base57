@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    base57 | About
+</title>
+{% endblock %}
+
+{% block body %}
+<div id="about" class="container">
+    <h2>How it Works</h2>
+    <p>
+        Imagine you are the server.
+        A client gives you an abhorrently long URL for you to shorten, so what do you do?
+        Just assign a number to function as an ID to the URL and return that to the client, making sure to keep note of it in preperation for their eventual return.
+    </p>
+    <p>
+        Let's be honest... no self-respecting URL shortener just hands out plain old integers.
+        But why not?
+        If a URL shortener hands out a single integer for every short link it generates, those short links will quickly become not-so-short.
+    </p>
+    <p>
+        Enter mathematics.
+        Take a whole alphabet of symbols to use to represent integers - who says you can have only ten symbols?
+        To be URL-safe, just stick with the familiar ten digits and letters both big and small.
+        Throw out symbols that look similar, like <code>0, 1, l, I, O</code> and you're left with a number system in <b>base 57</b>.
+        Why bother to throw out lookalike symbols?
+        Because you prefer the mystique of base <em>57</em>.
+    </p>
+
+    <p>
+        Now, you want your links to look nice and pretty, so make sure they are a set amount of characters.
+        Four will do.
+        Then, because you don't want users to easily snoop around other short links, throw in some randomness and mix up the alphabet of 57 symbols you've chosen.
+        Now zero isn't "0", it's "h", and so on.
+    </p>
+
+    <p>
+        But this isn't very random at all.
+        A user could just create a few links and get a general idea of the pattern pretty easily.
+        As a solution, since there are 57^4 possible short links, you decide to scale each ID (modulo 57^4) by a large number that is <a href="https://en.wikipedia.org/wiki/Coprime_integers">relatively prime</a> to 57^4.
+        Now your short links follow no obvious pattern.
+    </p>
+
+    <p>
+        But when a client gives you a short link, how do you know to retrieve the correct URL?
+        Well, just convert their short link back to an integer and scale (modulo 57^4) by the <a href="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse">modular inverse</a> of the scalar you chose previously.
+        Now you've obtained the original link ID and you can happily return back the client's URL.
+    </p>
+</div>
+
+{% endblock %}

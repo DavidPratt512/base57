@@ -22,23 +22,21 @@
 <div id="response" class="container">
 
     <p>
-        Your shiny new short link:
-        <input type="url" class="the-link" value="http://b57.xyz/{{ short_url }}">
+    <b>Your shortlink:</b>
+        <input type="url" class="the-link" value="http://b57.xyz/{{ short_url }}" disabled>
         <!--
             <a class="the-link" href="http://b57.xyz/{{ short_url }}">http://b57.xyz/{{ short_url }}</a>
         -->
-    </p>
-    <p>
-        <button class="btn link-copy-btn">Copy to Clipboard</button>
+        <button class="btn link-copy-btn">Copy</button>
     </p>
 </div>
 <script type="text/javascript">
-    var copyLinkBtn = document.querySelector('.link-copy-btn');
+    var copyLinkBtn = document.querySelector(".link-copy-btn");
 
     copyLinkBtn.addEventListener(
-      'click',
+      "click",
       function(event) {
-        var shortlink = document.querySelector('.the-link');
+        var shortlink = document.querySelector(".the-link");
         shortlink.focus();
         shortlink.select();
         var outcome = document.execCommand("copy") ? "successful" : "unsucessful";

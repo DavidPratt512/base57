@@ -67,7 +67,7 @@ footer span {
 
 #response .the-link {
     font-weight: bold;
-    width: 120px;
+    width: 128px;
     padding: 4px 10px;
 }
 
@@ -92,6 +92,5 @@ input[type=url] {
 }
 
 .btn.link-copy-btn {
-    padding: 4px 20px;
-    background-color: #a3be8c;
+    padding: 4px 8px;
 }

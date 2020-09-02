@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 BUTTON_TEXT = [
     'Shorten me!',
     'Shrink me!',
-    'I shrunk the URL!',
+    'Honey, I shrunk the URL!',
     'Minify this!',
 ]
 

@@ -1,9 +1,9 @@
-#base57 - URL Shortener
+# base57 - URL Shortener
 
 This small app uses Flask and PostgreSQL to shorten URLS.
 
 
-##About
+## About
 
 Instead of using base 62 (digits + uppercase letters + lowercase letters), throw out the 5 lookalike characters to be left with base 57.
 The general idea is to encode a URL **uniquely** and **deterministically** in base 57.

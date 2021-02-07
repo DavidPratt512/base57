@@ -5,34 +5,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="David Pratt">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	{% block head %}{% endblock %}
 </head>
 
 
 <body>
-    <div id="main-container">
-        <main>
-            <header class="header">
-                <div class="container">
-                    <h1><a href="/" class="header-text">base57</a></h1>
-                    <p>A no-nonsense URL shortener.</p>
-                </div>
-            </header>
-            {% block body %}{% endblock %}
-        </main>
-        <footer>
-            <div class="container">
-                <span>
-                    Created by <a href="https://github.com/davidpratt512">David Pratt</a>
-                    &nbsp;&bull;&nbsp;
-                    <a href="/about">How it works</a>
-                    &nbsp;&bull;&nbsp;
-                    Powered by <a href="https://flask.palletsprojects.com">Flask</a>
-                </span>
-            </div>
-        </footer>
+    <div class="container">
+        <header class="header">
+            <h1>base57</h1>
+            <p>A no-nonsense URL shortener.</p>
+        </header>
+        {% block body %}{% endblock %}
     </div>
 </body>
 

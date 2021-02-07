@@ -1,0 +1,71 @@
+body {
+    color: #ebdbb2;
+    background: #282828;
+}
+
+th, td {
+    border-bottom: 1px dotted #ebdbb2;
+}
+
+a {
+    color: #83a598;
+}
+
+a:hover {
+    color: #458588;
+}
+
+.header {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.section-header {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: .2rem;
+    font-weight: 600;
+    color: #b16286;
+}
+
+.doc-section {
+    border-bottom: 1px solid #a89984;
+    padding: 4rem 0rem 0rem;
+    margin-bottom: 0;
+}
+
+code {
+    background: #a89984;
+    border-color: #928374;
+    color: #282828;
+    font-family: monospace;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 20rem;
+    background-color: #a89984;
+    color: #282828;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10rem;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

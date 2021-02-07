@@ -7,16 +7,12 @@
 {% endblock %}
 
 {% block body %}
-<div id="form" class="container">
-
     <form action="/" method="POST" name="mainform">
 
         <input type="url" id="url-input" name="url-input" placeholder="{{ long_url if long_url else 'Paste in a URL to shorten' }}" required autofocus>
         <input type="submit" class="btn" value="{{ button_text }}">
 
     </form>
-
-</div>
 
 {% if short_url %}
 <div id="response" class="container">

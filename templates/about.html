@@ -95,13 +95,13 @@
               </tr>
           </tbody>
       </table>
-      <p>The above table spells out how the numerical keys are being converted into shortlinks. However, if this were to be the final result, anyone who has ever created a URL shortener would be laughing... <em>"Those shortlinks are so predictible!", "How tame!"</em>, they would tease. Well, we can do better.</p>
+      <p>The above table spells out how the numerical keys are being converted into shortlinks. However, if this were to be the final result, anyone who has ever created a URL shortener would be laughing... <em>"Those shortlinks are so predictable!", "How tame!"</em>, they would tease. Well, we can do better.</p>
   </div>
   <div id="number-theory" class="doc-section">
       <h4 class="section-header">Number Theory</h4>
       <p>Although it would be easy to simply generate random strings for shortlinks, that would eventually end terribly. Suppose the server is already keeping track of a set of randomly generated shortlinks, say <em>S</em>, and the server is asked to generate a new shortlink, say <em>x<sub>0</sub></em>. Well, if <em>x<sub>0</sub></em> is already in <em>S</em>, the server must generate a new shortlink, <em>x<sub>1</sub></em>. But what if <em>x<sub>1</sub></em> is already in <em>S</em>? Uh-oh. Randomly generating shortlinks opens the possibility of taking an infinite amount of time to generate a single shortlink.</p>
       <p>So the question is, how can seemingly random shortlinks be generated while guaranteeing uniqueness among them? One solution to this lies in number theory in conjunction with base 57. (There is nothing particularly special about base 57 - except that I like it.)</p>
-      <p>In the previous section, the shortlinks generated in the table follow a rather bland, predictible order. Our goal is to maintain predictability while simultaneously obfuscating the order to an outside observer. The order that the shortlinks follow in the above table can be defined by the 57 symbols and the relation between successive shortlinks. We can therefore do two things:</p>
+      <p>In the previous section, the shortlinks generated in the table follow a rather bland, predictable order. Our goal is to maintain predictability while simultaneously obfuscating the order to an outside observer. The order that the shortlinks follow in the above table can be defined by the 57 symbols and the relation between successive shortlinks. We can therefore do two things:</p>
       <ol>
           <li>Reorder the symbols we use in base 57.</li>
           <li>Change the relation between successive shortlinks.</li>
@@ -111,7 +111,7 @@
       <p>The current relationship between successive shortlinks is simple. To generate a new shortlink, increment the most recent database key and encode it in base 57. In order to change this relationship, something else must be done before encoding the database key in base 57.</p>
       <p>Here, the goal is to map a database key uniquely to another number in the range [0, 57<sup>4</sup>-1], while also having a way to get back to the original database key. This can be accomplished with modular arithmetic.</p>
       <p>Choose a number that is relatively prime to 57<sup>4</sup> &ndash; this will be called the <em>multiplier</em>. Since the multiplier is relatively prime to 57<sup>4</sup>, it has a <a target="_blank" href="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse">modular inverse</a> (modulo 57<sup>4</sup>). This modular inverse will be called the <em>inverse multiplier</em>. For example, 3,141,592 and 5,252,017 are a valid multiplier and inverse multiplier pair.</p>
-      <p>Now the server will generate shorlinks like so:</p>
+      <p>Now the server will generate shortlinks like so:</p>
       <ol>
           <li>Increment the most recently generated database key to obtain a new key, <em>K</em>.</li>
           <li>Multiply the chosen multiplier by <em>K</em> modulo 57<sup>4</sup>.</li>

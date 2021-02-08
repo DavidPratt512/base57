@@ -152,7 +152,7 @@
       <p>The relationship between successive shortlinks is unclear without knowing how they were generated, which was the goal all along.</p>
       <p>All that's left is to figure out how to turn a shortlink into a database key... luckily that isn't too bad. Simply convert the shortlink from base 57 into plain-old base 10 and multiply by the inverse multiplier modulo 57<sup>4</sup>. That's it.</p>
   </div>
-  <div id="conclusion" class="doc-section">
+  <div id="conclusion" class="doc-section last-section">
       <h4 class="section-header">Conclusion</h4>
       <p>Recall the three steps of a URL shortener. Here they are again but annotated with what has been discussed:</p>
       <ol>
@@ -166,5 +166,6 @@
               <p>The server decodes the key from base 57 into base 10, then multiplies this with the <em>inverse multiplier</em> modulo 57<sup>4</sup> to obtain the database key. The server looks up the key in the database and returns the associated URL to the client.</p>
           </li>
       </ol>
+      <p>You can check out the <a href="https://github.com/DavidPratt512/base57">source code</a> for even more detail.</p>
   </div>
 {% endblock %}

@@ -101,15 +101,70 @@
       <h4 class="section-header">Number Theory</h4>
       <p>Although it would be easy to simply generate random strings for shortlinks, that would eventually end terribly. Suppose the server is already keeping track of a set of randomly generated shortlinks, say <em>S</em>, and the server is asked to generate a new shortlink, say <em>x<sub>0</sub></em>. Well, if <em>x<sub>0</sub></em> is already in <em>S</em>, the server must generate a new shortlink, <em>x<sub>1</sub></em>. But what if <em>x<sub>1</sub></em> is already in <em>S</em>? Uh-oh. Randomly generating shortlinks opens the possibility of taking an infinite amount of time to generate a single shortlink.</p>
       <p>So the question is, how can seemingly random shortlinks be generated while guaranteeing uniqueness among them? One solution to this lies in number theory in conjunction with base 57. (There is nothing particularly special about base 57 - except that I like it.)</p>
-      <p>In the previous section, the shortlinks generated in the table follow a rather bland, predictible order. Our goal is to maintain predictability while simultaneously obfuscating the order to an outside observer. The order that the shortlinks follow in the above table can be defined by the 57 symbols and the relation that any shortlink is succeeded incrementally. We can therefore do two things:</p>
+      <p>In the previous section, the shortlinks generated in the table follow a rather bland, predictible order. Our goal is to maintain predictability while simultaneously obfuscating the order to an outside observer. The order that the shortlinks follow in the above table can be defined by the 57 symbols and the relation between successive shortlinks. We can therefore do two things:</p>
       <ol>
           <li>Reorder the symbols we use in base 57.</li>
           <li>Change the relation between successive shortlinks.</li>
       </ol>
       <p>To complete the first action, use instead a random scramble of those symbols, say <code>AyV4sDhXRfxuM3nP2pGHQzTYBJ86WidrjckoNELeKZb9vwagqUSm75FtC</code>.</p>
       <p>The shortlinks in the above table would then be represented as <em>AAAA, AAAy, AAAV</em>, respectively. While there is less predictability in determining the successive shortlink, the second action can still be taken to further obfuscate the shortlinks.</p>
-      <p>Since there is an implicit commitment to using exactly 57 symbols to create shortlinks exactly 4 characters long, there are 57<sup>4</sup> = 10,556,001 possible shortlinks. Remember that the database key of each of these shortlinks is nothing more than one of the numbers from 0 to 57<sup>4</sup> - 1.</p>
-      <p>In number theoretical terms, the set of numbers 0 through 57<sup>4</sup> - 1 forms a <a href="https://en.wikipedia.org/wiki/Modular_arithmetic#Residue_systems" target="_blank">complete residue system</a> modulo 57<sup>4</sup>. In short, this means that there are no two distinct numbers <em>x</em> and <em>y</em>, both in this set, that share the same remainder (residue) after being divided by 57<sup>4</sup>.</p>
-      <p></p>
+      <p>The current relationship between successive shortlinks is simple. To generate a new shortlink, increment the most recent database key and encode it in base 57. In order to change this relationship, something else must be done before encoding the database key in base 57.</p>
+      <p>Here, the goal is to map a database key uniquely to another number in the range [0, 57<sup>4</sup>-1], while also having a way to get back to the original database key. This can be accomplished with modular arithmetic.</p>
+      <p>Choose a number that is relatively prime to 57<sup>4</sup> &ndash; this will be called the <em>multiplier</em>. Since the multiplier is relatively prime to 57<sup>4</sup>, it has a <a target="_blank" href="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse">modular inverse</a> (modulo 57<sup>4</sup>). This modular inverse will be called the <em>inverse multiplier</em>. For example, 3,141,592 and 5,252,017 are a valid multiplier and inverse multiplier pair.</p>
+      <p>Now the server will generate shorlinks like so:</p>
+      <ol>
+          <li>Increment the most recently generated database key to obtain a new key, <em>K</em>.</li>
+          <li>Multiply the chosen multiplier by <em>K</em> modulo 57<sup>4</sup>.</li>
+          <li>Encode the result of the previous step in base 57. This is the shortlink that should be given to the client.</li>
+      </ol>
+      <p>Here is the table that reflects the change to the new ordering of symbols and the new algorithm to generate shortlinks using the multiplier and inverse multiplier pair given as an example:</p>
+      <table class="u-full-width">
+          <thead>
+              <tr>
+                  <th>Key</th>
+                  <th>
+                      <div class="tooltip">
+                          Shortlink<sup>*</sup>
+                          <span class="tooltiptext">This column is not actually in the database. It is just here for demonstration.</span>
+                      </div>
+                  </th>
+                  <th>URL</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>0</td>
+                  <td>AAAA</td>
+                  <td><a target="_blank" href="https://mathoverflow.net/questions/42512/awfully-sophisticated-proof-for-simple-facts">https://mathoverflow.net/questions/42512/awfully-sophisticated-proof-for-simple-facts</a></td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>2F5E</td>
+                  <td><a target="_blank" href="https://projecteuler.net/problem=37">https://projecteuler.net/problem=37</a></td>
+              </tr>
+              <tr>
+                  <td>2</td>
+                  <td>c7Sp</td>
+                  <td><a target="_blank" href="https://en.wikipedia.org/wiki/Narwhal#In_literature_and_art">https://en.wikipedia.org/wiki/Narwhal#In_literature_and_art</a></td>
+              </tr>
+          </tbody>
+      </table>
+      <p>The relationship between successive shortlinks is unclear without knowing how they were generated, which was the goal all along.</p>
+      <p>All that's left is to figure out how to turn a shortlink into a database key... luckily that isn't too bad. Simply convert the shortlink from base 57 into plain-old base 10 and multiply by the inverse multiplier modulo 57<sup>4</sup>. That's it.</p>
+  </div>
+  <div id="conclusion" class="doc-section">
+      <h4 class="section-header">Conclusion</h4>
+      <p>Recall the three steps of a URL shortener. Here they are again but annotated with what has been discussed:</p>
+      <ol>
+          <li>A client gives the server a URL.</li>
+          <li>
+              The server creates a key-value pairing between a number (key) and the URL (value). It gives the key to the client.
+              <p>The most recently generated key is incremented to give the new key. The server will multiply this key by the <em>multiplier</em> modulo 57<sup>4</sup>, encode that into base 57, and give that to the client.</p>
+          </li>
+          <li>
+              A client returns with the key. The server gives the corresponding value to the client.
+              <p>The server decodes the key from base 57 into base 10, then multiplies this with the <em>inverse multiplier</em> modulo 57<sup>4</sup> to obtain the database key. The server looks up the key in the database and returns the associated URL to the client.</p>
+          </li>
+      </ol>
   </div>
 {% endblock %}

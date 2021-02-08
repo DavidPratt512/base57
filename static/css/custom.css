@@ -1,6 +1,6 @@
 body {
     color: #ebdbb2;
-    background: #282828;
+    background: #1d2021;
 }
 
 th, td {
@@ -8,11 +8,22 @@ th, td {
 }
 
 a {
-    color: #83a598;
+    color: #458588;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #458588;
+    color: #83a598;
+    text-decoration: underline;
+}
+
+ul, ol {
+    padding-left: 4rem;
+}
+
+ul, ol > li > p {
+    padding-top: 1rem;
+    padding-left: 2rem;
 }
 
 .header {

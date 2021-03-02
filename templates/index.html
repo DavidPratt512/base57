@@ -2,46 +2,43 @@
 
 {% block head %}
 <title>
-    base57 | URL Shortener
+  base57 | URL Shortener
 </title>
 {% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="ten columns offset-by-one">
-            <form action="/" method="POST" name="mainform">
-                <input type="url" class="u-full-width" id="url-input" name="url-input" placeholder="{{ long_url if long_url else 'Paste in a URL to shorten' }}" required autofocus>
-                <input type="submit" class="button-primary" value="{{ button_text }}">
-            </form>
-        </div>
-    </div>
+<div class="row">
+  <div class="ten columns offset-by-one">
+    <form action="/" method="POST" name="mainform">
+      <input type="url" class="u-full-width" id="url-input" name="url-input" placeholder="{{ long_url if long_url else 'Paste in a URL to shorten' }}" required autofocus>
+      <input type="submit" class="button-primary" value="{{ button_text }}">
+    </form>
+  </div>
+</div>
 
 {% if short_url %}
 <div id="response" class="row">
 
-    <div class="ten columns offset-by-one">
-        <b>Your shortlink:</b>
-            <input type="url" class="the-link u-full-width" value="http://b57.xyz/{{ short_url }}">
-            <!--
-                <a class="the-link" href="http://b57.xyz/{{ short_url }}">http://b57.xyz/{{ short_url }}</a>
-            -->
-            <button class="button-primary link-copy-btn">Copy</button>
-    </div>
+  <div class="ten columns offset-by-one">
+    <b>Your shortlink:</b>
+    <input type="url" class="the-link u-full-width" value="http://b57.xyz/{{ short_url }}">
+    <button class="button-primary link-copy-btn">Copy</button>
+  </div>
 </div>
 <script type="text/javascript">
-    var copyLinkBtn = document.querySelector(".link-copy-btn");
+  var copyLinkBtn = document.querySelector(".link-copy-btn");
 
-    copyLinkBtn.addEventListener(
-      "click",
-      function(event) {
-        var shortlink = document.querySelector(".the-link");
-        shortlink.focus();
-        shortlink.select();
-        var outcome = document.execCommand("copy") ? "successful" : "unsucessful";
-        shortlink.blur();
-        console.log("Copy to clipboard was " + outcome);
-      }
-    )
+copyLinkBtn.addEventListener(
+  "click",
+  function(event) {
+    var shortlink = document.querySelector(".the-link");
+    shortlink.focus();
+    shortlink.select();
+    var outcome = document.execCommand("copy") ? "successful" : "unsucessful";
+    shortlink.blur();
+    console.log("Copy to clipboard was " + outcome);
+  }
+)
 </script>
 {% endif %}
 {% endblock %}

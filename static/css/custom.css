@@ -1,123 +1,127 @@
 body {
-    color: #ebdbb2;
-    background: #1d2021;
+  color: #ebdbb2;
+  background: #1d2021;
 }
 
 th, td {
-    border-bottom: 1px dotted #ebdbb2;
+  border-bottom: 1px dotted #ebdbb2;
 }
 
 a {
-    color: #458588;
-    text-decoration: none;
+  color: #458588;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #83a598;
-    text-decoration: underline;
+  color: #83a598;
+  text-decoration: underline;
 }
 
 a#title-link {
-    color: #ebdbb2;
-    text-decoration:none;
-    font-weight: bold;
-    letter-spacing: 0.15rem;
+  color: #ebdbb2;
+  text-decoration:none;
+  font-weight: bold;
+  letter-spacing: 0.15rem;
+}
+
+p {
+  line-height: 2em;
 }
 
 ul, ol {
-    padding-left: 4rem;
+  padding-left: 4rem;
 }
 
 ul, ol > li > p {
-    padding-top: 1rem;
-    padding-left: 2rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
 }
 
 input[type="url"] {
-    background-color: #282828;
-    border-color: #ebdbb2;
+  background-color: #282828;
+  border-color: #ebdbb2;
 }
 
 input[type="url"]:focus {
-    border: 1px solid #458588;
+  border: 1px solid #458588;
 }
 
 button.button-primary,
 input[type="submit"].button-primary {
-    color: #1d2021;
-    background-color: #458588;
-    border-color: #458588;
+  color: #1d2021;
+  background-color: #458588;
+  border-color: #458588;
 }
 
 button.button-primary:hover,
 input[type="submit"].button-primary:hover {
-    color: #1d2021;
-    background-color: #83a598;
-    border-color: #83a598;
+  color: #1d2021;
+  background-color: #83a598;
+  border-color: #83a598;
 }
 
 .button.button-primary:focus,
 input[type="submit"].button-primary:focus, {
-    color: #1d2021;
-    background-color: #83a598;
-    border-color: #83a598;
+  color: #1d2021;
+  background-color: #83a598;
+  border-color: #83a598;
 }
 
 .header {
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-    text-align: center;
-    text-decoration: none;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+  text-align: center;
+  text-decoration: none;
 }
 
 .section-header {
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    letter-spacing: .2rem;
-    font-weight: 600;
-    color: #b16286;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  letter-spacing: .2rem;
+  font-weight: 600;
+  color: #b16286;
 }
 
 .doc-section {
-    border-bottom: 1px solid #a89984;
-    padding: 4rem 0rem 0rem;
-    margin-bottom: 0;
+  border-bottom: 1px solid #a89984;
+  padding: 4rem 0rem 0rem;
+  margin-bottom: 0;
 }
 
 .doc-section.last-section {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 code {
-    background: #a89984;
-    border-color: #928374;
-    color: #282828;
-    font-family: monospace;
+  background: #a89984;
+  border-color: #928374;
+  color: #282828;
+  font-family: monospace;
 }
 
 .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted;
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 20rem;
-    background-color: #a89984;
-    color: #282828;
-    text-align: center;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 5px 0;
+  visibility: hidden;
+  width: 20rem;
+  background-color: #a89984;
+  color: #282828;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 5px 0;
 
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -10rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -10rem;
 }
 
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+  visibility: visible;
 }
